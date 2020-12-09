@@ -3,39 +3,29 @@ const db = require('../models')
 module.exports = (app) => {
 
     // Get the last workout
-    // app.get("/api/workouts", (req, res) => {
-    //     db.Workout.find({})
-    //     .then(dbWorkout => {
-    //         dbWorkout.forEach(workout => {
-    //             var total = 0;
-    //             workout.exercises.forEach(e => {
-    //                 total += e.duration;
-    //             });
-    //             workout.totalDuration = total;
-    //         });
-    //         res.json(dbWorkout);
-    //     }).catch(err => {
-    //         res.json(err);
-    //     });
-    // });
-
-    app.get("/api/workouts",function(req,res){  
-        db.Workout.find()
-        .then(data =>{  
-            res.json(data)
-        })
-        .catch(err => { 
-            res.json(err)
-        })
+    app.get("/api/workouts", (req, res) => {
+        db.Workout.find({})
+        .then(dbWorkout => {
+            dbWorkout.forEach(workout => {
+                var total = 0;
+                workout.exercises.forEach(e => {
+                    total += e.duration;
+                });
+                workout.totalDuration = total;
+            });
+            res.json(dbWorkout);
+        }).catch(err => {
+            res.json(err);
+        });
     });
 
-    // Add exercise
+// Add exercise also added the {new: true} to return the updated record not the old record before the updates
     app.put("/api/workouts/:id", (req, res) => {
 
         db.Workout.findOneAndUpdate(
             { _id: req.params.id },
             {
-                $inc: { totalDuration: req.body.duration },
+                $inc: { totalDuration: req.body.duration},
                 $push: { exercises: req.body }
             },
             { new: true }).then(dbWorkout => {
