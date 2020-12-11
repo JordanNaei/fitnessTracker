@@ -9,19 +9,19 @@ This application is designed to create a workout tracker where client will be ab
 
 # Application Image
 
-![Application main screen]()
+![Application main screen](https://github.com/JordanNaei/fitnessTracker/blob/main/public/img/app1.PNG?raw=true)
 
 <hr>
 
-![Application Stat Page]()
+![Application Stat Page](https://github.com/JordanNaei/fitnessTracker/blob/main/public/img/app2.PNG?raw=true)
 
 <hr>
 
-![Application excercise Page]()
+![Application excercise Page](https://github.com/JordanNaei/fitnessTracker/blob/main/public/img/app3.PNG?raw=true)
 
 <hr>
 
-- [Application URL](https://still-island-50748.herokuapp.com/)
+- [Application URL]()
 
 ## Technologies and Frameworks Used
 
@@ -38,50 +38,58 @@ This application is designed to create a workout tracker where client will be ab
 # Database Design
 
 Schema({
-day: {
-type: Date,
-default: Date.now
-},
-exercises: [
-{
-type: {
-type: String,
-trim: true,
-},
-name: {
-type: String,
-trim: true,
-},
-duration: Number,
-weight: {
-type: Number,
-default: 0
-},
-reps: {
-type: Number,
-default: 0
-},
-sets: {
-type: Number,
-default: 0
-},
-distance: {
-type: Number,
-default: 0
-}
-}
-],
-totalDuration: Number,
+        day: {
+        type: Date,
+        default: Date.now
+        },
+        exercises: [
+        {
+        type: {
+        type: String,
+        trim: true,
+        },
+        name: {
+        type: String,
+        trim: true,
+        },
+        duration: Number,
+        weight: {
+        type: Number,
+        default: 0
+        },
+        reps: {
+        type: Number,
+        default: 0
+        },
+        sets: {
+        type: Number,
+        default: 0
+        },
+        distance: {
+        type: Number,
+        default: 0
+        }
+        }
+        ],
+        totalDuration: Number,
 });
 
-# Application Requirements
+## Business Context
 
+A consumer will reach their fitness goals more quickly when they track their workout progress.
 
+## Acceptance Criteria
 
-# Commit Notice
+When the user loads the page, they should be given the option to create a new workout or continue with their last workout.
 
-Our Team had issues with commiting code, and due to time constraint we took rather unorthodox way to commit.
+The user should be able to:
+
+  * Add exercises to a previous workout plan (pass)
+
+  * Add new exercises to a new workout plan (pass)
+
+  * View the combined weight of multiple exercises on the `stats` page.(The front end code provided does not meet this requirments)
 
 # Repository
 
-- [Project Repo](https://github.com/JordanNaei/passiveIncome)
+- [Project Repo](https://github.com/JordanNaei/fitnessTracker)
