@@ -5,7 +5,7 @@
 
 # Description
 
-This application is designed to create a workout tracker where client will be able to track their exercises, add new exercises, and add a new exercise to already created workouts.
+This application is designed to create a workout tracker where client will be able to track their exercises, create new exercises, and add a new exercise to already created workouts.
 
 # Application Image
 
