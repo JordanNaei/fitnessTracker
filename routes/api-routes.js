@@ -1,31 +1,32 @@
-//  This is all the api routes
-const db = require('../models')
+//requiring the dependecies
+const Workout = require("../models/workout")
 module.exports = (app) => {
 
-    // Get the last workout
+    // get the last workout by sedning all the workouts and at the front end they are displaying the last entry of the array which represnt the Last workout
     app.get("/api/workouts", (req, res) => {
-        db.Workout.find({})
-        .then(dbWorkout => {
-            dbWorkout.forEach(workout => {
-                var total = 0;
-                workout.exercises.forEach(e => {
-                    total += e.duration;
+        Workout.find({})
+            .then(dbWorkout => {
+                // Added this piece to ensure that the get route will get the total duration since it is not client delivered
+                dbWorkout.forEach(workout => {
+                    let sumDuration = 0;
+                    workout.exercises.forEach(exercise => {
+                        sumDuration += exercise.duration;
+                    });
+                    workout.totalDuration = sumDuration;
                 });
-                workout.totalDuration = total;
+                res.json(dbWorkout);
+            }).catch(err => {
+                res.json(err);
             });
-            res.json(dbWorkout);
-        }).catch(err => {
-            res.json(err);
-        });
     });
 
-// Add exercise also added the {new: true} to return the updated record not the old record before the updates
+    // Add exercise also added the {new: true} to return the updated record not the old record before the updates
     app.put("/api/workouts/:id", (req, res) => {
 
-        db.Workout.findOneAndUpdate(
+        Workout.findOneAndUpdate(
             { _id: req.params.id },
             {
-                $inc: { totalDuration: req.body.duration},
+                $inc: { totalDuration: req.body.duration },
                 $push: { exercises: req.body }
             },
             { new: true }).then(dbWorkout => {
@@ -36,19 +37,29 @@ module.exports = (app) => {
 
     });
 
-    //create workout
+    //create workout through the post route and handle the ingestion of the total duration
     app.post("/api/workouts", ({ body }, res) => {
-        db.Workout.create(body).then((dbWorkout => {
-            res.json(dbWorkout);
+        const workouts = new Workout(body);
+        (workouts) => {
+            workouts.forEach(workout => {
+                let sumDuration = 0;
+                workout.exercises.forEach(exercise => {
+                    sumDuration += exercise.duration;
+                });
+                workout.totalDuration = sumDuration;
+            });
+        }
+        Workout.create(workouts).then((workoutdb => {
+            console.log(workoutdb);
+            res.json(workoutdb);
         })).catch(err => {
             res.json(err);
         });
     });
 
-    // get workouts in range
+    // get workouts in range, meaning respond with all the documents within our collection
     app.get("/api/workouts/range", (req, res) => {
-
-        db.Workout.find({}).then(dbWorkout => {
+        Workout.find({}).then(dbWorkout => {
             res.json(dbWorkout);
         }).catch(err => {
             res.json(err);

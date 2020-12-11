@@ -1,4 +1,4 @@
-// This is the server code
+//require exppress for Server and morgan for logs and mongoose for our DB
 const express = require('express');
 const logger = require('morgan');
 const mongoose = require('mongoose');
@@ -20,12 +20,9 @@ app.use(express.json());
 //use static files
 app.use(express.static("public"));
 
-
-
 //use routes
 require('./routes/api-routes')(app)
 require('./routes/html-routes')(app)
-
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}..`);

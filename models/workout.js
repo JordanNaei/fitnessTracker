@@ -36,12 +36,13 @@ const WorkoutSchema = new Schema({
       }
     }
   ],
-  totalDuration: {
-    type: Number,
-    default: 0,
-  }
-
+  totalDuration: Number,
 });
 
-const Workout = mongoose.model("Workout", WorkoutSchema);
-module.exports = Workout;
+// WorkoutSchema.methods.addUpDurations = function() {
+
+//   return this.totalDuration = this.length;
+// };
+
+  const Workout = mongoose.model("Workout", WorkoutSchema);
+  module.exports = Workout ;
