@@ -21,7 +21,7 @@ This application is designed to create a workout tracker where client will be ab
 
 <hr>
 
-- [Application URL](https://thawing-depths-68958.herokuapp.com/)
+- [Application URL](https://guarded-waters-71708.herokuapp.com/)
 
 ## Technologies and Frameworks Used
 
